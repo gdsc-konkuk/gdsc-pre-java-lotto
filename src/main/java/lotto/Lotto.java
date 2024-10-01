@@ -13,6 +13,26 @@ public class Lotto {
         this.numbers = numbers.stream().sorted().toList();
     }
 
+    public Lotto(String userInputForWinnings) throws NumberFormatException {
+        String[] splited = userInputForWinnings.split(",");
+        if(splited.length != 6){
+            throw new IllegalArgumentException("[ERROR] 당첨번호는 ,(comma)로 구분된 6개의 숫자로 입력해주세요.");
+        }
+        Set<Integer> numberSet = new HashSet<>();
+        for(String s: splited){
+            Integer integer = Integer.parseInt(s);
+            validateLottoNumber(integer);
+            numberSet.add(integer);
+        }
+        this.numbers = numberSet.stream().sorted().toList();
+    }
+
+    public static void validateLottoNumber(Integer integer){
+        if(integer < 1 || integer > 45){
+            throw new IllegalArgumentException("[ERROR] 1부터 45까지의 정수를 입력해주세요.");
+        }
+    }
+
     private void validate(List<Integer> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException();
