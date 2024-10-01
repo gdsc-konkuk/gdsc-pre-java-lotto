@@ -8,40 +8,26 @@ public class Application {
     public static void main(String[] args) {
         // 1. 구입 금액 입력
         Integer amount = null;
-        while (amount == null) {
-            try {
-                System.out.println("구입금액을 입력해 주세요.");
-                int input = Integer.parseInt(Console.readLine());
-                validateAmount(input);
-                amount = input;
-            } catch (NumberFormatException e) {
-                System.out.println("[ERROR] 입력값은 정수가 아닙니다.");
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        System.out.println();
+        amount = getAmount(amount);
 
         // 2. 사용자 객체 생성
         User user = new User(amount);
 
         // 3. 당첨 번호 입력
         Lotto winLotto = null;
-        while(winLotto == null){
-            try {
-                System.out.println("당첨 번호를 입력해주세요.");
-                String userInputForWinnings = Console.readLine();
-                winLotto = makeWinningLotto(userInputForWinnings);
-            } catch (NumberFormatException e) {
-                System.out.println("[ERROR] 입력값은 정수가 아닙니다.");
-            } catch (IllegalArgumentException e){
-                System.out.println(e.getMessage());
-            }
-        }
-        System.out.println(winLotto);
+        winLotto = getWinLotto(winLotto);
 
         // 4. 보너스 번호 입력
         Integer bonus = null;
+        bonus = getBonus(bonus, winLotto);
+
+        // 5. 결과 출력
+        System.out.println("당첨 통계");
+        System.out.println("---");
+        System.out.println(user.getResultString(winLotto, bonus));
+    }
+
+    private static Integer getBonus(Integer bonus, Lotto winLotto) {
         while(bonus == null){
             try {
                 System.out.println("보너스 번호를 입력해 주세요.");
@@ -56,11 +42,40 @@ public class Application {
             }
         }
         System.out.println(bonus);
+        return bonus;
+    }
 
-        // 5. 결과 출력
-        System.out.println("당첨 통계");
-        System.out.println("---");
-        System.out.println(user.getResultString(winLotto, bonus));
+    private static Lotto getWinLotto(Lotto winLotto) {
+        while(winLotto == null){
+            try {
+                System.out.println("당첨 번호를 입력해주세요.");
+                String userInputForWinnings = Console.readLine();
+                winLotto = makeWinningLotto(userInputForWinnings);
+            } catch (NumberFormatException e) {
+                System.out.println("[ERROR] 입력값은 정수가 아닙니다.");
+            } catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }
+        }
+        System.out.println(winLotto);
+        return winLotto;
+    }
+
+    private static Integer getAmount(Integer amount) {
+        while (amount == null) {
+            try {
+                System.out.println("구입금액을 입력해 주세요.");
+                int input = Integer.parseInt(Console.readLine());
+                validateAmount(input);
+                amount = input;
+            } catch (NumberFormatException e) {
+                System.out.println("[ERROR] 입력값은 정수가 아닙니다.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        System.out.println();
+        return amount;
     }
 
     private static void validateAmount(int amount) {
