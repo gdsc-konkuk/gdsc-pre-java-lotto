@@ -21,3 +21,4 @@ GitHub ID: SIKU-KR
 3. <code>Lotto</code>: 로또의 정보 저장
    1. <code>toString</code>: 출력 정보 오버라이딩
 
+
