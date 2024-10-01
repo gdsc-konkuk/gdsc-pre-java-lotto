@@ -1,12 +1,12 @@
 package lotto;
 
 public enum Rank {
-    FIRST(6L, false,2000000000, "6개 일치 (2,000,000,000원)"),
-    SECOND(5L, true, 30000000, "5개 일치, 보너스 볼 일치 (30,000,000원)"),
-    THIRD(5L, false, 1500000, "5개 일치 (1,500,000원)"),
-    FOURTH(4L, false, 50000, "4개 일치 (50,000원)"),
+    NONE(0L, false, 0, "꽝"),
     FIFTH(3L, false, 5000, "3개 일치 (5,000원)"),
-    NONE(0L, false, 0, "꽝");
+    FOURTH(4L, false, 50000, "4개 일치 (50,000원)"),
+    THIRD(5L, false, 1500000, "5개 일치 (1,500,000원)"),
+    SECOND(5L, true, 30000000, "5개 일치, 보너스 볼 일치 (30,000,000원)"),
+    FIRST(6L, false,2000000000, "6개 일치 (2,000,000,000원)");
 
 
     private final Long matchCount;
