@@ -14,13 +14,9 @@ public class User {
     private final List<Lotto> lottos;
 
     public User(Integer buyAmount) {
-        if (buyAmount < 1000 || buyAmount % 1000 != 0) {
-            throw new IllegalArgumentException("[ERROR] 구입금액은 1000원 단위로 입력해주세요.");
-        }
         Integer lottoCounts = buyAmount / 1000;
         this.lottos = this.makeLottos(lottoCounts);
-        System.out.println(lottoCounts + "개를 구매했습니다.");
-        System.out.println(this);
+        IO.printUserConstructed(lottoCounts, this);
     }
 
     private List<Lotto> makeLottos(Integer lottoCounts) {
