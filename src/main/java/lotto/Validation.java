@@ -6,7 +6,12 @@ import java.util.List;
 public class Validation {
     public int purchase(String s) {
         if (s.matches("\\d+")) {
-            int purchase = Integer.parseInt(s);
+            int purchase = 0;
+            try {
+                purchase = Integer.parseInt(s);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("[ERROR] -2^31부터 2^31-1까지의 범위 내에서 입력해야 합니다.");
+            }
             if (purchase < 0 || purchase % 1000 != 0) {
                 throw new IllegalArgumentException("[ERROR] 1000으로 나누어 떨어지는 자연수를 입력해야 합니다.");
             }
@@ -21,7 +26,12 @@ public class Validation {
             throw new IllegalArgumentException("[ERROR] 6개의 자연수를 기호 {,}를 활용하여 구분해 입력해야 합니다.");
         }
         for (String t : st) {
-            int num = Integer.parseInt(t.trim());
+            int num = 0;
+            try {
+                num = Integer.parseInt(t.trim());
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("[ERROR] 1~45 사이의 자연수를 입력해야 합니다.");
+            }
             if (num < 1 || num > 45) {
                 throw new IllegalArgumentException("[ERROR] 1~45 사이의 자연수를 입력해야 합니다.");
             } else if (list.contains(num)) {
