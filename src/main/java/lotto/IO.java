@@ -2,6 +2,13 @@ package lotto;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.Arrays;
+import java.util.List;
+
+/*
+ * IO Class
+ * 1. Input/Output의 관리
+ * */
 public class IO {
 
     public static Integer getAmount() {
@@ -10,9 +17,7 @@ public class IO {
             try {
                 System.out.println("구입금액을 입력해 주세요.");
                 int input = Integer.parseInt(Console.readLine());
-                if (input < 1000 || input % 1000 != 0) {
-                    throw new IllegalArgumentException("[ERROR] 구입금액은 1000원 단위로 입력해주세요.");
-                }
+                Validation.inputAmount(input);
                 amount = input;
             } catch (NumberFormatException e) {
                 System.out.println("[ERROR] 입력값은 정수가 아닙니다.");
@@ -25,21 +30,26 @@ public class IO {
         return amount;
     }
 
-    public static Lotto getWinLotto() {
-        Lotto winLotto = null;
+    public static List<Integer> getWinLotto() {
+        List<Integer> winLotto = null;
         while (winLotto == null) {
             try {
                 System.out.println("당첨 번호를 입력해주세요.");
                 String userInputForWinnings = Console.readLine();
-                winLotto = new Lotto(userInputForWinnings);
+                winLotto = parseInputForWinnings(userInputForWinnings);
+                Validation.lottoNumbers(winLotto);
             } catch (NumberFormatException e) {
                 System.out.println("[ERROR] 입력값은 정수가 아닙니다.");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
-        System.out.println(winLotto);
         return winLotto;
+    }
+
+    public static List<Integer> parseInputForWinnings(String str) throws NumberFormatException{
+        return Arrays.stream(str.split(","))
+                .map(s -> Integer.parseInt(s.trim())).toList();
     }
 
     public static Integer getBonus(Lotto winLotto) {
@@ -48,8 +58,8 @@ public class IO {
             try {
                 System.out.println("보너스 번호를 입력해 주세요.");
                 int input = Integer.parseInt(Console.readLine());
-                Lotto.validateLottoNumber(input);
-                winLotto.validateBonus(input);
+                Validation.lottoNumberRange(input);
+                Validation.bonusNumber(winLotto, input);
                 bonus = input;
             } catch (NumberFormatException e) {
                 System.out.println("[ERROR] 입력값은 정수가 아닙니다.");
@@ -61,14 +71,17 @@ public class IO {
         return bonus;
     }
 
-    public static void printResult(String result){
+    public static void printLotto(String lotto) {
+        System.out.println(lotto);
+    }
+
+    public static void printResult(String result) {
         System.out.println("당첨 통계");
         System.out.println("---");
         System.out.println(result);
     }
 
-    public static void printUserConstructed(Integer lottoCounts, User user){
+    public static void printLottoCounts(Integer lottoCounts) {
         System.out.println(lottoCounts + "개를 구매했습니다.");
-        System.out.println(user);
     }
 }

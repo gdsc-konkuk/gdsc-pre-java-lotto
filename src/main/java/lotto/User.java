@@ -15,8 +15,8 @@ public class User {
 
     public User(Integer buyAmount) {
         Integer lottoCounts = buyAmount / 1000;
+        IO.printLottoCounts(lottoCounts);
         this.lottos = this.makeLottos(lottoCounts);
-        IO.printUserConstructed(lottoCounts, this);
     }
 
     private List<Lotto> makeLottos(Integer lottoCounts) {
@@ -27,15 +27,6 @@ public class User {
         return ret;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder ret = new StringBuilder();
-        for (Lotto item : this.lottos) {
-            ret.append(item.toString());
-            ret.append("\n");
-        }
-        return ret.toString();
-    }
 
     public String getResult(Lotto winLotto, Integer bonus) {
         int cost = this.lottos.size() * 1000;
@@ -44,6 +35,8 @@ public class User {
         double profitRate = ((double) totalEarnings / cost) * 100;
         return getResultString(rankCount, profitRate);
     }
+
+
 
     private int getTotalEarnings(Map<Rank, Integer> rankCount) {
         int totalEarnings = 0;

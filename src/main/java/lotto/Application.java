@@ -1,8 +1,10 @@
 package lotto;
 
+import java.util.List;
+
 /*
  * Application Class
- * 1. 프로그램의 흐름의 전체적인 관리 (main 함수)
+ * 1. 프로그램의 흐름 관리 (main 함수)
  * */
 public class Application {
 
@@ -14,7 +16,8 @@ public class Application {
         User user = new User(amount);
 
         // 3. 당첨 번호 입력
-        Lotto winLotto = IO.getWinLotto();
+        List<Integer> winningNumbers = IO.getWinLotto();
+        Lotto winLotto = new Lotto(winningNumbers);
 
         // 4. 보너스 번호 입력
         Integer bonus = IO.getBonus(winLotto);
