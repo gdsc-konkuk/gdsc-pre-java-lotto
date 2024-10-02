@@ -9,22 +9,17 @@ public class InputSequence {
     private int purchase;
     private int bonus;
     private List<Lotto> buy;
+    private Validation vd;
 
-    public InputSequence(Scanner scanner) {
+    public InputSequence(Scanner scanner, Validation vd) {
+        this.vd=vd;
         this.sc = scanner;
-        //readLine()의 존재를 너무 늦게알아챈 탓에, 스캐너쓰겠습니다. 봐주세요 봐주세요 봐주세요 >_<~~
-    }
-    public void start(){
-        PurchaseSequence();
-        PrizeSequence();
-        BonusSequence();
     }
 
-    private void PurchaseSequence() {
+    public void PurchaseSequence() {
         try {
             Purchase();
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] 1000으로 나누어 떨어지는 자연수를 입력해야 합니다.");
             PurchaseSequence();
         }
         buy = new ArrayList<>();
@@ -38,14 +33,11 @@ public class InputSequence {
 
     private void Purchase() {
         System.out.println("구입 금액을 입력해 주세요.");
-        purchase = sc.nextInt();
-        sc.nextLine();
-        if (purchase < 0 || purchase % 1000 != 0) {
-            throw new IllegalArgumentException();
-        }
+        String input=sc.nextLine();
+        purchase=vd.purchase(input);
     }
 
-    private void PrizeSequence() {
+    public void PrizeSequence() {
         prizeNum = new ArrayList<>();
         try {
             Prize();
@@ -56,26 +48,10 @@ public class InputSequence {
 
     private void Prize() {
         System.out.println("\n" + "당첨 번호를 입력해 주세요.");
-        String[] st = sc.nextLine().split(",");
-        if (st.length != 6) {
-            System.out.println("[ERROR] 6개의 자연수를 기호 {,}를 활용하여 구분해 입력해야 합니다.");
-            throw new IllegalArgumentException();
-        }
-        for (String s : st) {
-            int num = Integer.parseInt(s.trim());
-            if (num < 1 || num > 45) {
-                System.out.println("[ERROR] 1~45 사이의 자연수를 입력해야 합니다.");
-                throw new IllegalArgumentException();
-            } else if (prizeNum.contains(num)) {
-                System.out.println("[ERROR] 중복되지 않는 값을 정해야 합니다.");
-                prizeNum.clear();
-                throw new IllegalArgumentException();
-            }
-            prizeNum.add(num);
-        }
+        vd.prize(sc.nextLine(),prizeNum);
     }
 
-    private void BonusSequence() {
+    public void BonusSequence() {
         try {
             Bonus();
         }catch (IllegalArgumentException e){
@@ -85,14 +61,7 @@ public class InputSequence {
 
     private void Bonus() {
         System.out.println("\n"+"보너스 번호를 입력해 주세요.");
-        bonus=sc.nextInt();
-        if(bonus<1||bonus>45){
-            System.out.println("[ERROR] 1~45 사이의 자연수를 입력해야 합니다.");
-            throw new IllegalArgumentException();
-        }else if(prizeNum.contains(bonus)){
-            System.out.println("[ERROR] 중복되지 않는 값을 정해야 합니다.");
-            throw new IllegalArgumentException();
-        }
+        bonus=vd.Bonus(sc.nextLine(),prizeNum);
     }
 
     public List<Integer> getPrizeNum() {
