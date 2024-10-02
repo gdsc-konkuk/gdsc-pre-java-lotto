@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 public class InputSequence {
     private Scanner sc;
-    private List<Integer> prizeNum;
+    private Lotto prizeNum;
     private int purchase;
     private int bonus;
     private List<Lotto> buy;
@@ -20,6 +20,7 @@ public class InputSequence {
         try {
             Purchase();
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             PurchaseSequence();
         }
         buy = new ArrayList<>();
@@ -38,23 +39,24 @@ public class InputSequence {
     }
 
     public void PrizeSequence() {
-        prizeNum = new ArrayList<>();
         try {
             Prize();
         } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
             PrizeSequence();
         }
     }
 
     private void Prize() {
         System.out.println("\n" + "당첨 번호를 입력해 주세요.");
-        vd.prize(sc.nextLine(),prizeNum);
+        this.prizeNum=new Lotto(sc.nextLine());
     }
 
     public void BonusSequence() {
         try {
             Bonus();
         }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
             BonusSequence();
         }
     }
@@ -64,7 +66,7 @@ public class InputSequence {
         bonus=vd.Bonus(sc.nextLine(),prizeNum);
     }
 
-    public List<Integer> getPrizeNum() {
+    public Lotto getPrizeNum() {
         return prizeNum;
     }
 
