@@ -1,10 +1,36 @@
 package lotto;
 
+import com.sun.tools.javac.Main;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Validation {
-    public int purchase(String s) {
+    private Scanner sc= Application.sc;
+    private final int lottoPrice;
+
+    public Validation(int lottoPrice) {
+        this.lottoPrice = lottoPrice;
+    }
+
+    public int purchase() {
+        int validAmount = -1;
+        boolean isValid = false;
+        while (!isValid) {
+            System.out.println("구입 금액을 입력해 주세요.");
+            try {
+                String input = sc.nextLine();
+                validAmount = purchaseValid(input);
+                isValid = true;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return validAmount/lottoPrice;
+    }
+
+    private int purchaseValid(String s) {
         if (s.matches("\\d+")) {
             int purchase = 0;
             try {
@@ -19,9 +45,26 @@ public class Validation {
         }
         throw new IllegalArgumentException("[ERROR] 자연수만 입력해야 합니다.");
     }
-    public List<Integer> prize(String s){
+
+    public List<Integer> prize() {
+        boolean isValid = false;
+        List<Integer> prize = null;
+        while (!isValid) {
+            System.out.println("\n" + "당첨 번호를 입력해 주세요.");
+            try {
+                String input = sc.nextLine();
+                prize = prizeValid(input);
+                isValid = true;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return prize;
+    }
+
+    public List<Integer> prizeValid(String s) {
         ArrayList<Integer> list = new ArrayList();
-        String[] st=s.split(",");
+        String[] st = s.split(",");
         if (st.length != 6) {
             throw new IllegalArgumentException("[ERROR] 6개의 자연수를 기호 {,}를 활용하여 구분해 입력해야 합니다.");
         }
@@ -42,16 +85,34 @@ public class Validation {
         }
         return list;
     }
-    public int Bonus(String s, Lotto prizeNum) {
+
+    public int Bonus(Lotto prizeNum) {
+        boolean isValid = false;
+        int bonus = 0;
+        while (!isValid) {
+            System.out.println("\n" + "당첨 번호를 입력해 주세요.");
+            try {
+                String input = sc.nextLine();
+                bonus = bonusValid(input, prizeNum);
+                isValid = true;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return bonus;
+    }
+
+    private int bonusValid(String s, Lotto prizeNum) {
         if (s.matches("\\d+")) {
             int bonus = Integer.parseInt(s);
-            if(bonus<1||bonus>45){
+            if (bonus < 1 || bonus > 45) {
                 throw new IllegalArgumentException("[ERROR] 1~45 사이의 자연수를 입력해야 합니다.");
-            }else if(prizeNum.getNumbers().contains(bonus)){
+            } else if (prizeNum.getNumbers().contains(bonus)) {
                 throw new IllegalArgumentException("[ERROR] 중복되지 않는 값을 정해야 합니다.");
             }
             return bonus;
         }
         throw new IllegalArgumentException("[ERROR] 자연수만 입력해야 합니다.");
     }
+
 }
