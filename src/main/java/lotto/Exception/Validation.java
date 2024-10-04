@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Set;
 
 /*
- * IO Class
+ * Validation Class
  * 1. Input의 검증 관리
  * 2. Lotto 객체 생성시 검증 관리
  * */
-public class Exception {
+public class Validation {
     private static final int AMOUNT_UNIT = 1000;
 
     public static void inputAmount(int input){
@@ -22,7 +22,7 @@ public class Exception {
 
     public static void lottoNumbers(List<Integer> numbers) throws IllegalArgumentException {
         for(Integer integer: numbers){
-            Exception.lottoNumberRange(integer);
+            Validation.lottoNumberRange(integer);
         }
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("올바른 숫자 6개를 입력해주세요.");

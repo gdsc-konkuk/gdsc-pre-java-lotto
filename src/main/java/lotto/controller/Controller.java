@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.Exception.Exception;
+import lotto.Exception.Validation;
 import lotto.Model.Lotto;
 import lotto.Model.User;
 import lotto.view.In;
@@ -43,7 +43,7 @@ public class Controller {
     private Integer getAmount(){
         try{
             Integer value = inview.getAmount();
-            Exception.inputAmount(value);
+            Validation.inputAmount(value);
             return value;
         } catch(NumberFormatException e){
             System.out.println("[ERROR] 입력값은 정수가 아닙니다.");
@@ -64,7 +64,7 @@ public class Controller {
         try{
             String value = inview.getWinLotto();
             List<Integer> parsedValue = this.parseInputForWinnings(value);
-            Exception.lottoNumbers(parsedValue);
+            Validation.lottoNumbers(parsedValue);
             return parsedValue;
         } catch(NumberFormatException e){
             System.out.println("[ERROR] 입력값은 정수가 아닙니다.");
@@ -83,8 +83,8 @@ public class Controller {
     public Integer getBonusNumber(Lotto winLotto){
         try{
             Integer value = inview.getBonus();
-            Exception.lottoNumberRange(value);
-            Exception.bonusNumber(winLotto, value);
+            Validation.lottoNumberRange(value);
+            Validation.bonusNumber(winLotto, value);
             return value;
         } catch(NumberFormatException e){
             System.out.println("[ERROR] 입력값은 정수가 아닙니다.");

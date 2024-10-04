@@ -1,6 +1,6 @@
 package lotto.Model;
 
-import lotto.Exception.Exception;
+import lotto.Exception.Validation;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class Lotto {
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
-        Exception.lottoNumbers(numbers);
+        Validation.lottoNumbers(numbers);
         this.numbers = numbers.stream().sorted().toList();
     }
 
