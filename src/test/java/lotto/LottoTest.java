@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.Exception.Exception;
+import lotto.Model.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +30,7 @@ class LottoTest {
     @Test
     void 보너스번호_검증테스트() {
         Lotto lotto = new Lotto(List.of(1,2,3,4,5,6));
-        assertThatThrownBy(() -> Validation.bonusNumber(lotto, 6))
+        assertThatThrownBy(() -> Exception.bonusNumber(lotto, 6))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 

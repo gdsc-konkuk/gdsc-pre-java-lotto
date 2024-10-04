@@ -1,4 +1,6 @@
-package lotto;
+package lotto.Exception;
+
+import lotto.Model.Lotto;
 
 import java.util.HashSet;
 import java.util.List;
@@ -9,7 +11,7 @@ import java.util.Set;
  * 1. Input의 검증 관리
  * 2. Lotto 객체 생성시 검증 관리
  * */
-public class Validation {
+public class Exception {
     public static void inputAmount(int input){
         if (input < 1000 || input % 1000 != 0) {
             throw new IllegalArgumentException("[ERROR] 구입금액은 1000원 단위로 입력해주세요.");
@@ -18,7 +20,7 @@ public class Validation {
 
     public static void lottoNumbers(List<Integer> numbers) throws IllegalArgumentException {
         for(Integer integer: numbers){
-            Validation.lottoNumberRange(integer);
+            Exception.lottoNumberRange(integer);
         }
         if (numbers.size() != 6) {
             throw new IllegalArgumentException();

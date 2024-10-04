@@ -1,5 +1,11 @@
 package lotto;
 
+import lotto.Model.Lotto;
+import lotto.Model.User;
+import lotto.controller.Controller;
+import lotto.view.In;
+import lotto.view.Out;
+
 import java.util.List;
 
 /*
@@ -9,21 +15,8 @@ import java.util.List;
 public class Application {
 
     public static void main(String[] args) {
-        // 1. 구입 금액 입력
-        Integer amount = IO.getAmount();
-
-        // 2. 사용자 객체 생성
-        User user = new User(amount);
-
-        // 3. 당첨 번호 입력
-        List<Integer> winningNumbers = IO.getWinLotto();
-        Lotto winLotto = new Lotto(winningNumbers);
-
-        // 4. 보너스 번호 입력
-        Integer bonus = IO.getBonus(winLotto);
-
-        // 5. 결과 출력
-        IO.printResult(user.getResult(winLotto, bonus));
+        Controller controller = new Controller(new In(), new Out());
+        controller.run();
     }
 
 }

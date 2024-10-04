@@ -1,6 +1,7 @@
-package lotto;
+package lotto.Model;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import lotto.Rank;
 
 import java.util.*;
 
@@ -14,9 +15,11 @@ public class User {
     private final List<Lotto> lottos;
 
     public User(Integer buyAmount) {
-        Integer lottoCounts = buyAmount / 1000;
-        IO.printLottoCounts(lottoCounts);
-        this.lottos = this.makeLottos(lottoCounts);
+        this.lottos = this.makeLottos(buyAmount / 1000);
+    }
+
+    public List<Lotto> getLottos(){
+        return this.lottos;
     }
 
     private List<Lotto> makeLottos(Integer lottoCounts) {
