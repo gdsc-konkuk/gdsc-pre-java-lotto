@@ -12,8 +12,10 @@ import java.util.Set;
  * 2. Lotto 객체 생성시 검증 관리
  * */
 public class Exception {
+    private static final int AMOUNT_UNIT = 1000;
+
     public static void inputAmount(int input){
-        if (input < 1000 || input % 1000 != 0) {
+        if (input < AMOUNT_UNIT || input % AMOUNT_UNIT != 0) {
             throw new IllegalArgumentException("[ERROR] 구입금액은 1000원 단위로 입력해주세요.");
         }
     }
