@@ -24,14 +24,14 @@ public class Controller {
     }
 
     public void run(){
-        User user = makeUser();
-        Lotto winLotto = makeWinLotto();
-        Integer bonusNum = getBonusNumber(winLotto);
+        User user = createUserLottoTickets();
+        Lotto winLotto = createWinningLotto();
+        Integer bonusNum = fetchBonusNumber(winLotto);
         outview.printResult(user.getResult(winLotto, bonusNum));
     }
 
-    private User makeUser(){
-        User user = new User(this.getAmount());
+    private User createUserLottoTickets(){
+        User user = new User(this.fetchPurchaseAmount());
         List<Lotto> lottos = user.getLottos();
         outview.printLottoCounts(lottos.size());
         for (Lotto lotto: lottos){
@@ -40,27 +40,27 @@ public class Controller {
         return user;
     }
 
-    private Integer getAmount(){
+    private Integer fetchPurchaseAmount(){
         try{
             Integer value = inview.getAmount();
             Validation.inputAmount(value);
             return value;
         } catch(NumberFormatException e){
             System.out.println("[ERROR] 입력값은 정수가 아닙니다.");
-            return this.getAmount();
+            return this.fetchPurchaseAmount();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return this.getAmount();
+            return this.fetchPurchaseAmount();
         }
     }
 
-    private Lotto makeWinLotto(){
-        Lotto winLotto = new Lotto(this.getWinLottoNumbers());
+    private Lotto createWinningLotto(){
+        Lotto winLotto = new Lotto(this.fetchWinningNumbers());
         outview.printLotto(winLotto);
         return winLotto;
     }
 
-    private List<Integer> getWinLottoNumbers(){
+    private List<Integer> fetchWinningNumbers(){
         try{
             String value = inview.getWinLotto();
             List<Integer> parsedValue = this.parseInputForWinnings(value);
@@ -68,10 +68,10 @@ public class Controller {
             return parsedValue;
         } catch(NumberFormatException e){
             System.out.println("[ERROR] 입력값은 정수가 아닙니다.");
-            return this.getWinLottoNumbers();
+            return this.fetchWinningNumbers();
         } catch(IllegalArgumentException e){
             System.out.println(e.getMessage());
-            return this.getWinLottoNumbers();
+            return this.fetchWinningNumbers();
         }
     }
 
@@ -80,7 +80,7 @@ public class Controller {
                 .map(s -> Integer.parseInt(s.trim())).toList();
     }
 
-    public Integer getBonusNumber(Lotto winLotto){
+    public Integer fetchBonusNumber(Lotto winLotto){
         try{
             Integer value = inview.getBonus();
             Validation.lottoNumberRange(value);
@@ -88,10 +88,10 @@ public class Controller {
             return value;
         } catch(NumberFormatException e){
             System.out.println("[ERROR] 입력값은 정수가 아닙니다.");
-            return this.getBonusNumber(winLotto);
+            return this.fetchBonusNumber(winLotto);
         } catch(IllegalArgumentException e){
             System.out.println(e.getMessage());
-            return this.getBonusNumber(winLotto);
+            return this.fetchBonusNumber(winLotto);
         }
     }
 }
