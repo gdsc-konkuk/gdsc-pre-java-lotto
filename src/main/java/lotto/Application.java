@@ -10,7 +10,7 @@ import java.util.List;
 
 /*
  * Application Class
- * 1. 프로그램의 흐름 관리 (main 함수)
+ * 1. Controller 객체를 생성하고 실행시켜 프로그램을 관리
  * */
 public class Application {
 

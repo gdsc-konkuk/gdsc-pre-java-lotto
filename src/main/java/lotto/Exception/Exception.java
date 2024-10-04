@@ -23,11 +23,11 @@ public class Exception {
             Exception.lottoNumberRange(integer);
         }
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("올바른 숫자 6개를 입력해주세요.");
         }
         Set<Integer> set = new HashSet<>(numbers);
         if (numbers.size() != set.size()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("올바른 숫자 6개를 입력해주세요.");
         }
     }
 

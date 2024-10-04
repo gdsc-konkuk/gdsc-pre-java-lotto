@@ -1,4 +1,4 @@
-package lotto;
+package lotto.Model;
 
 public enum Rank {
     NONE(0L, false, 0, "꽝"),

@@ -2,6 +2,11 @@ package lotto.view;
 
 import lotto.Model.Lotto;
 
+/*
+ * Out Class
+ * 1. 프로그램의 모든 출력을 관리함
+ * */
+
 public class Out {
     public void printLotto(Lotto lotto) {
         System.out.println(lotto.toString());

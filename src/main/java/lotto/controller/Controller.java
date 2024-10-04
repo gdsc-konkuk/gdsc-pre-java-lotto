@@ -9,6 +9,11 @@ import lotto.view.Out;
 import java.util.Arrays;
 import java.util.List;
 
+/*
+ * Controller Class
+ * View 패키지의 in과 out에 대해 의존관계를 가짐
+ * 1. 프로그램의 흐름 관리 (run 함수)
+ * */
 public class Controller {
     private In inview;
     private Out outview;
