@@ -12,6 +12,11 @@ public class Lotto implements Product {
     }
 
     public Lotto(String s) {
+        numbers = validate(s);
+    }
+
+    private List<Integer> validate(String s) {
+        final List<Integer> numbers;
         ArrayList<Integer> list = new ArrayList();
         String[] st = s.split(",");
         if (st.length != 6) {
@@ -33,7 +38,7 @@ public class Lotto implements Product {
             list.add(num);
         }
         list.sort(Integer::compareTo);
-        this.numbers = list;
+        return list;
     }
 
     private void validate(List<Integer> numbers) {
