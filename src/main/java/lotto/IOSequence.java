@@ -10,7 +10,7 @@ public class IOSequence {
     public IOSequence(Scanner sc) {
         this.sc = sc;
     }
-    public int inputInt() {
+    public int inputPurchaseMoney() {
         int input = 0;
             try {
                 System.out.println("구입금액을 입력해 주세요.");

@@ -10,8 +10,7 @@ public class Application {
         IOSequence io=new IOSequence(new Scanner(System.in));
         User user = new User();
         // 초기 투자금 지정
-        user.setPurchaseMoney(io.inputInt());
-        System.out.println();
+        user.setPurchaseMoney(io.inputPurchaseMoney());
         Seller seller = new Seller(new LottoProducer());
         // 셀러에게 로또 구매
         user.orderToSeller(seller);
