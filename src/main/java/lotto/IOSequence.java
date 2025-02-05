@@ -12,23 +12,20 @@ public class IOSequence {
     }
     public int inputInt() {
         int input = 0;
-        while (true) {
             try {
                 System.out.println("구입금액을 입력해 주세요.");
                 String s = sc.nextLine();
                 input = Integer.parseInt(s);
                 if (input <= 0) {
-                    System.out.println("[ERROR]구입금액은 1 이상의 숫자를 입력해야 합니다.");
-                    continue;
+                    System.out.println("[ERROR]구입금액은 1 이상의 숫자를 입력해야 합니다. 프로그램을 종료합니다.");
+                    return input;
                 } else if (input%1000!=0){
-                    System.out.println("[ERROR]구입금액은 1000으로 나눠져야 합니다.");
-                    continue;
+                    System.out.println("[ERROR]구입금액은 1000으로 나눠져야 합니다. 프로그램을 종료합니다.");
+                    return input;
                 }
-                break;
             } catch (Exception e) {
-                System.out.println("[ERROR]잘못된 입력입니다. 숫자를 입력해 주세요.");
+                System.out.println("[ERROR]잘못된 입력입니다. 프로그램을 종료합니다.");
             }
-        }
         return input;
     }
     public Lotto inputWinningLotto(){

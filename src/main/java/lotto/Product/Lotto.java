@@ -55,6 +55,17 @@ public class Lotto implements Product {
     public List<Integer> getNumbers() {
         return numbers;
     }
+    // Refactor : Lotto 에서 당첨 번호 체크하게끔 함
+    public boolean matchNumber(int winNum){
+        if (this.numbers.contains(winNum)) {
+            return true;
+        }return false;
+    }
+
+    // Refactor : Lotto 에서 스스로 보너스 번호 체크하게끔 함
+    public int matchBonusNumber(int winningBonusNumber){
+        return numbers.contains(winningBonusNumber) ? 1 : 0;
+    }
 
 
 }
