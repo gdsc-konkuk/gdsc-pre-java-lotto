@@ -1,8 +1,7 @@
-package lotto.Producer;
+package lotto.domain.producer;
 
-import camp.nextstep.edu.missionutils.Randoms;
-import lotto.Product.Lotto;
-import lotto.Product.Product;
+import lotto.domain.product.Lotto;
+import lotto.domain.product.Product;
 
 import java.util.ArrayList;
 import java.util.List;

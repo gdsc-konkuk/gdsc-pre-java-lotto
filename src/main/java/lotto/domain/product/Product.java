@@ -1,4 +1,4 @@
-package lotto.Product;
+package lotto.domain.product;
 
 public interface Product {
 }

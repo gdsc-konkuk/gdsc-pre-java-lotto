@@ -1,8 +1,7 @@
-package lotto;
+package lotto.domain;
 
-import lotto.Producer.Producer;
-import lotto.Product.Lotto;
-import lotto.Product.Product;
+import lotto.domain.producer.Producer;
+import lotto.domain.product.Product;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ public class Seller {
         this.producer = Producer;
     }
 
-    public List<Product> orderSequence(int ProductCount, User Buyer) {
+    public List<Product> orderSequence(int ProductCount) {
         // producer 에게서 상품을 만들어 Buyer 에게 전달
         return this.producer.produceProducts(ProductCount);
     }

@@ -1,6 +1,6 @@
-package lotto.Producer;
+package lotto.domain.producer;
 
-import lotto.Product.Product;
+import lotto.domain.product.Product;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public enum LottoPrize {
     FIRST(2_000_000_000.0),

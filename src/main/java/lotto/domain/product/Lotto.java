@@ -1,4 +1,4 @@
-package lotto.Product;
+package lotto.domain.product;
 
 import java.util.ArrayList;
 import java.util.List;
